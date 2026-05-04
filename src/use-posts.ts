@@ -29,10 +29,10 @@ export const usePosts = () => {
     };
   }, []);
 
-  const onClickUpdate = async (id: number) => {
+  const onClickUpdate = async (post: Post) => {
     try {
-      const response = await updatePost(id);
-      return response;
+      await updatePost(post);
+      setPosts((prev) => prev.map((p) => (p.id === post.id ? post : p)));
     } catch {
       setError("Erro ao atualizar post.");
     }
